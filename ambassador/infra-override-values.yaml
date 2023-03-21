@@ -1,0 +1,291 @@
+
+nameOverride: 'gw-infra-prod'
+
+replicaCount: 3
+daemonSet: false
+
+autoscaling:
+  enabled: false
+  minReplicas: 2
+  maxReplicas: 5
+  metrics:
+  - type: Resource
+    resource:
+      name: cpu
+      target:
+        type: Utilization
+        averageUtilization: 60
+  - type: Resource
+    resource:
+      name: memory
+      target:
+        type: Utilization
+        averageUtilization: 60
+
+podDisruptionBudget: {}
+
+env:
+  AMBASSADOR_ID: "gw-infra-prod"
+
+
+image:
+  repository: docker.io/datawire/aes
+  tag: 3.5.0
+  pullPolicy: IfNotPresent
+
+dnsPolicy: "ClusterFirst"
+hostNetwork: false
+
+service:
+  type: LoadBalancer
+  ports:
+    - name: http
+      port: 80
+      targetPort: 8080
+    - name: https
+      port: 443
+      targetPort: 8080
+
+  annotations:
+    service.beta.kubernetes.io/aws-load-balancer-type: "nlb"
+    # first install without this
+    service.beta.kubernetes.io/aws-load-balancer-ssl-ports: "443"
+    service.beta.kubernetes.io/aws-load-balancer-cross-zone-load-balancing-enabled: "true"
+    service.beta.kubernetes.io/aws-load-balancer-ssl-cert: "arn:aws:acm:ap-south-1:262258409534:certificate/86977c98-a15e-4e94-afd4-698221a4664b"
+
+
+adminService:
+  create: true
+  type: ClusterIP
+  port: 8877
+  snapshotPort: 8005
+  annotations:
+    {}
+
+rbac:
+  # Specifies whether RBAC resources should be created
+  create: true
+  podSecurityPolicies: []
+  nameOverride: infra-gw-rbac
+
+scope:
+  # tells Ambassador to only use resources in the namespace or namespace set by namespace.name
+  singleNamespace: false
+
+serviceAccount:
+  # Specifies whether a service account should be created
+  create: true
+  name:
+
+deploymentStrategy:
+  type: RollingUpdate
+
+podLabels:
+  {}
+
+podAnnotations:
+  {}
+  # prometheus.io/scrape: "true"
+  # prometheus.io/port: "9102"
+
+deploymentLabels:
+  {}
+
+deploymentAnnotations:
+  {}
+  # configmap.reloader.stakater.com/auto: "true"
+
+resources:
+  # Recommended resource requests and limits for Ambassador
+  limits:
+    cpu: 1000m
+    memory: 600Mi
+  requests:
+    cpu: 200m
+    memory: 300Mi
+
+priorityClassName: ""
+
+nodeSelector: {}
+
+tolerations: []
+
+affinity: {}
+
+ambassadorConfig: ""
+
+crds:
+  enabled: true
+  create: true
+  keep: true
+
+enableAES: true
+
+# Set createSecret: false is installing multiple releases of The Ambassador
+# Edge Stack in the same namespace.
+licenseKey:
+  value:
+  createSecret: true
+  secretName:
+  # Annotations to attach to the license-key-secret.
+  annotations:
+    {}
+
+createDevPortalMappings: true
+
+redisURL:
+
+# Ambassador ships with a basic redis instance. Configure the deployment with the options below.
+redis:
+  create: true
+  image:
+    repository: redis
+    tag: 5.0.1
+    pullPolicy: IfNotPresent
+  # Annotations for Ambassador Pro's redis instance.
+  annotations:
+    deployment:
+      {}
+    service:
+      {}
+  resources: {}
+
+  nodeSelector: {}
+  affinity: {}
+  tolerations: {}
+
+
+authService:
+  create: true
+  # Set additional configuration options. See https://www.getambassador.io/reference/services/auth-service for more information
+  optional_configurations:
+
+rateLimit:
+  create: true
+
+registry:
+  create: false
+
+
+resolvers:
+  endpoint:
+    create: false
+    name: "endpoint"
+  consul:
+    create: false
+    name: "consul-dc1"
+    spec: {}
+
+servicePreview:
+  enabled: false
+  trafficManager:
+    image:
+      # Leave blank to use image.repository and image.tag
+      repository: ""
+      tag: ""
+    serviceAccountName: "traffic-manager"
+  trafficAgent:
+    image:
+      # Leave blank to use image.repository and image.tag
+      repository: ""
+      tag: ""
+    singleNamespace: true
+    serviceAccountName: "traffic-agent"
+    port: 9900
+
+    # Configure the ambassador-injector webhook for Service Preview Traffic Agent automatic sidecar injection.
+    injector:
+      enabled: true
+
+      crtPEM: ""
+      keyPEM: ""
+
+# Configure the ambassador agent
+agent:
+  enabled: true
+  cloudConnectToken: ""
+  rpcAddress: https://app.getambassador.io/
+  image:
+    # Leave blank to use image.repository and image.tag
+    tag: "2.3.1"
+    repository: "docker.io/emissaryingress/emissary"
+deploymentTool: ""
+
+module:
+  enabled: true
+  config: |
+    apiVersion: getambassador.io/v3alpha1
+    kind: Module
+    metadata:
+      name: ambassador
+    spec:
+      ambassador_id: ["gw-infra-prod"]
+      config:
+        use_proxy_proto: true
+        cors:
+          credentials: true
+          origins: "*"
+          methods: GET, PUT, DELETE, POST, OPTIONS, PATCH
+          #headers: "*"
+          headers:
+          - authorization
+          - access_token
+          - id_token
+          - content-type
+          - accept
+          - referer
+          - user-agent
+          - keep-alive
+          - accept-econding
+          - cache-control
+          - content-transfer-encoding
+          - x-accept-content-transfer-encoding
+          - x-accept-response-streaming
+          - x-user-agent
+          - x-grpc-web
+          - grpc-timeout
+          - Authorization
+          - Authorization-Bearer
+          - Cf-User-Type
+          - saas-user-id
+          - saas-namespace
+          - saas-account-id
+          - saas-organisation-id
+          - namespaceId
+          exposed_headers: content-type, grpc-status,grpc-message, grpc-encoding, grpc-accept-encoding
+          max_age: "86400"
+
+host:
+  enabled: true
+  config: |
+    apiVersion: getambassador.io/v3alpha1
+    kind: Host
+    metadata:
+      name: ambassador
+      namespace: infra-prod
+    spec:
+      ambassador_id: ["gw-infra-prod"]
+      hostname: "*.zurf.tech"
+      acmeProvider:
+        authority: none
+      requestPolicy:
+        insecure:
+          action: Route
+
+listener:
+  enabled: true
+  config: |
+    apiVersion: getambassador.io/v3alpha1
+    kind: Listener
+    metadata:
+      name: https-listener
+    spec:
+      ambassador_id: ["gw-infra-prod"]
+      port: 8080                     # int32, port number on which to listen
+      protocol: HTTPS                # HTTP, HTTPS, HTTPPROXY, HTTPSPROXY, TCP
+      securityModel: XFP             # XFP (for X-Forwarded-Proto), SECURE, INSECURE
+      statsPrefix: https-listener  # default depends on protocol; see below
+      l7Depth: 0                     # int32
+      hostBinding:
+        namespace:
+          from: ALL

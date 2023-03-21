@@ -1,0 +1,4 @@
+{{- if .Values.module.enabled }}
+{{- $config := $.Values.module.config }}
+{{ $config }}
+{{- end }}

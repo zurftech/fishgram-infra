@@ -1,0 +1,4 @@
+{{- if .Values.host.enabled }}
+{{- $config := $.Values.host.config }}
+{{ $config }}
+{{- end }}

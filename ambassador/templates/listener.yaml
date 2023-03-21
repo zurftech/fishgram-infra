@@ -1,0 +1,4 @@
+{{- if .Values.listener.enabled }}
+{{- $config := $.Values.listener.config }}
+{{ $config }}
+{{- end }}
