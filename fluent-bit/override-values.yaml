@@ -38,6 +38,6 @@ config:
         Name loki
         Match *
         Host loki.infra.captainfresh.in
-        port 80
+        port 443
         tls off
         tls.verify Off 
