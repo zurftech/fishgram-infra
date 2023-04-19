@@ -39,7 +39,7 @@ config:
         Match *
         Host logs-prod-014.grafana.net
         labels job=fluentbit
-        auto_kubernetes_labels on
+        label_keys $nms, $stream
         port 80
         http_user 405886
         tls off
