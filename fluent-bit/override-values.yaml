@@ -38,7 +38,7 @@ config:
         Name loki
         Match *
         Host logs-prod-014.grafana.net
-        labels job=fluentbit, $stream
+        labels job=fluentbit, $stream, $nms
         port 80
         http_user 405886
         tls off
