@@ -37,7 +37,9 @@ config:
     [OUTPUT]
         Name loki
         Match *
-        Host loki.infra.captainfresh.in
+        Host logs-prod-014.grafana.net
         port 80
+        http_user 405886
         tls off
-        tls.verify Off 
+        tls.verify Off
+        http_passwd eyJrIjoiNTQyYmUxMzdjMGViZjNkZDUyNDQzNjE2YjM2YzMwZGZjZGMzNTJhMCIsIm4iOiJUZXN0aW5nIEZsdWVudCBCaXQgR3JhZmFuYSBJbnRlZ3JhdGlvbiIsImlkIjo1OTk5MjF9
