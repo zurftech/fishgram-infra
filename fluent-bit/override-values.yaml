@@ -37,6 +37,6 @@ config:
     [OUTPUT]
         Name loki
         Match *
-        Host https://loki.infra.captainfresh.in
+        Host loki.infra.captainfresh.in
         tls off
         tls.verify Off 
