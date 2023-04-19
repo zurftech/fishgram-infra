@@ -39,7 +39,7 @@ config:
         Match *
         Host logs-prod-014.grafana.net
         labels job=fluentbit
-        label_keys $nms, $stream
+        label_keys namespace=$nms, stream=$stream
         port 80
         http_user 405886
         tls off
