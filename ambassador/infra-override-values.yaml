@@ -231,6 +231,7 @@ module:
           - authorization
           - access_token
           - id_token
+          - origin
           - content-type
           - accept
           - referer
@@ -252,9 +253,24 @@ module:
           - saas-account-id
           - saas-organisation-id
           - namespaceId
+          - namespace-id
+          - x-total-count
+          - x-access-token
+          - x-namespace-id
+          - x-user-id
+          - x-account-id
+          - Client-Id
+          - Client-Secret
           - fdi-version
           - rid
           - st-auth-mode
+          - front-token
+          - set-cookie
+          - id-refresh-token
+          - Namespace
+          - Profile-Id
+          - User-Id
+          - Account-Id
           exposed_headers: content-type, grpc-status,grpc-message, grpc-encoding, grpc-accept-encoding
           max_age: "86400"
 
