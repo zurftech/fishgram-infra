@@ -254,6 +254,7 @@ module:
           - namespaceId
           - fdi-version
           - rid
+          - st-auth-mode
           exposed_headers: content-type, grpc-status,grpc-message, grpc-encoding, grpc-accept-encoding
           max_age: "86400"
 
