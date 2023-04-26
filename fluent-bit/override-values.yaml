@@ -51,3 +51,5 @@ config:
         port 80
         tls off
         tls.verify Off
+        http_user admin
+        http_passwd eyJrIjoiOEgzOUVFSkoyamYzU3JvNGdyMXpQVFJONFNlRmZWQ2UiLCJuIjoiYWRtaW4iLCJpZCI6MX0=
