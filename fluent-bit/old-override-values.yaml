@@ -1,0 +1,47 @@
+config:
+  service: |
+    [SERVICE]
+        Daemon Off
+        Flush {{ .Values.flush }}
+        Log_Level {{ .Values.logLevel }}
+        Parsers_File parsers.conf
+        Parsers_File custom_parsers.conf
+        HTTP_Server On
+        HTTP_Listen 0.0.0.0
+        HTTP_Port {{ .Values.metricsPort }}
+        Health_Check On
+
+  ## https://docs.fluentbit.io/manual/pipeline/inputs
+  inputs: |
+    [INPUT]
+        Name tail
+        Exclude_Path  /var/log/containers/kube-proxy*, /var/log/containers/fluent-bit*, /var/log/containers/emissary-ingress-gw-dev*, /var/log/containers/data-sync-adapter*, /var/log/containers/listing-service*
+        Path /var/log/containers/*.log
+        multiline.parser docker, cri
+        Tag kube.*
+        Mem_Buf_Limit 5MB
+        Skip_Long_Lines On
+
+  ## https://docs.fluentbit.io/manual/pipeline/filters
+  filters: |
+    [FILTER]
+        Name kubernetes
+        Match kube.*
+        Merge_Log On
+        Keep_Log Off
+        K8S-Logging.Parser On
+        K8S-Logging.Exclude On
+
+  ## https://docs.fluentbit.io/manual/pipeline/outputs
+  outputs: |
+    [OUTPUT]
+        Name loki
+        Match *
+        Host logs-prod-014.grafana.net
+        labels job=fluentbit
+        label_keys $nms
+        port 80
+        http_user 405886
+        tls off
+        tls.verify Off
+        http_passwd eyJrIjoiNTQyYmUxMzdjMGViZjNkZDUyNDQzNjE2YjM2YzMwZGZjZGMzNTJhMCIsIm4iOiJUZXN0aW5nIEZsdWVudCBCaXQgR3JhZmFuYSBJbnRlZ3JhdGlvbiIsImlkIjo1OTk5MjF9
