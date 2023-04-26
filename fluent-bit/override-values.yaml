@@ -37,8 +37,6 @@ config:
     [OUTPUT]
         Name loki
         Match *
-        BatchWait 1
-        BatchSize 1048576
         Labels {job="fluent-bit"}
         RemoveKeys kubernetes,stream
         AutoKubernetesLabels false
