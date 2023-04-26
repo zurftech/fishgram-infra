@@ -35,7 +35,7 @@ config:
   ## https://docs.fluentbit.io/manual/pipeline/outputs
   outputs: |
     [OUTPUT]
-        Name grafana-loki
+        Name loki
         Match *
         Url https://loki.infra.captainfresh.in/api/prom/push
         TenantID ""
