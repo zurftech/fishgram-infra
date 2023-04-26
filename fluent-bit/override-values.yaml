@@ -38,11 +38,11 @@ config:
         Name loki
         Match *
         Labels {job="fluent-bit"}
-        RemoveKeys kubernetes,stream
-        AutoKubernetesLabels false
-        LabelMapPath /fluent-bit/etc/labelmap.json
-        LineFormat json
-        LogLevel warn
+        Remove_Keys kubernetes,stream
+        auto_kubernetes_labels false
+        Label_Map_Path /fluent-bit/etc/labelmap.json
+        Line_Format json
+        Log_Level warn
         Url https://loki.infra.captainfresh.in/api/prom/push
         label_keys $nms
         tls off
