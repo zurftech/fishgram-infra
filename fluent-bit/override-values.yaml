@@ -37,7 +37,6 @@ config:
     [OUTPUT]
         Name loki
         Match *
-        TenantID ""
         BatchWait 1
         BatchSize 1048576
         Labels {job="fluent-bit"}
