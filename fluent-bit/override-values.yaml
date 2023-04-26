@@ -35,15 +35,18 @@ config:
   ## https://docs.fluentbit.io/manual/pipeline/outputs
   outputs: |
     [OUTPUT]
-        Name loki
+        Name grafana-loki
         Match *
-        Labels {job="fluent-bit"}
-        Remove_Keys kubernetes,stream
-        auto_kubernetes_labels false
-        Label_Map_Path /fluent-bit/etc/labelmap.json
-        Line_Format json
-        Log_Level warn
         Url https://loki.infra.captainfresh.in/api/prom/push
+        TenantID ""
+        BatchWait 1
+        BatchSize 1048576
+        Labels {job="fluent-bit"}
+        RemoveKeys kubernetes,stream
+        AutoKubernetesLabels false
+        LabelMapPath /fluent-bit/etc/labelmap.json
+        LineFormat json
+        LogLevel warn
         label_keys $nms
         tls off
         tls.verify Off
