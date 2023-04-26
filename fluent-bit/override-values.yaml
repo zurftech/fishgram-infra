@@ -48,7 +48,6 @@ config:
         LogLevel warn
         Url https://loki.infra.captainfresh.in/api/prom/push
         label_keys $nms
-        port 80
         tls off
         tls.verify Off
         http_user admin
