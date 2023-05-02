@@ -42,7 +42,7 @@ config:
         labels job=fluentbit
         label_keys $nms
         port 80
-        http_user 405886
+        http_user fluentbit
         tls off
         tls.verify Off
         http_passwd eyJrIjoiOHJPTGFyaDhadVZCMGZ0VmVyNlJBcUNjNE9pNHM2QnoiLCJuIjoiZmx1ZW50Yml0IiwiaWQiOjF9
