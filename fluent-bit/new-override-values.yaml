@@ -37,8 +37,7 @@ config:
     [OUTPUT]
         Name loki
         Match *
-        Host loki.infra.captainfresh.in
-        URI  /api/prom/push
+        Host loki.infra.captainfresh.in/api/prom/push
         labels job=fluentbit
         label_keys $nms
         port 80
