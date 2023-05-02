@@ -37,18 +37,12 @@ config:
     [OUTPUT]
         Name loki
         Match *
-        Url https://loki.infra.captainfresh.in/api/prom/push
-        TenantID ""
-        BatchWait 1
-        BatchSize 1048576
-        Labels {job="fluent-bit"}
-        RemoveKeys kubernetes,stream
-        AutoKubernetesLabels false
-        LabelMapPath /fluent-bit/etc/labelmap.json
-        LineFormat json
-        LogLevel warn
+        Host loki.infra.captainfresh.in
+        URI  /api/prom/push
+        labels job=fluentbit
         label_keys $nms
+        port 80
+        http_user 405886
         tls off
         tls.verify Off
-        http_user admin
-        http_passwd eyJrIjoiOEgzOUVFSkoyamYzU3JvNGdyMXpQVFJONFNlRmZWQ2UiLCJuIjoiYWRtaW4iLCJpZCI6MX0=
+        http_passwd eyJrIjoiOHJPTGFyaDhadVZCMGZ0VmVyNlJBcUNjNE9pNHM2QnoiLCJuIjoiZmx1ZW50Yml0IiwiaWQiOjF9
