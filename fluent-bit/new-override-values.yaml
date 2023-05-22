@@ -41,11 +41,11 @@ config:
     [OUTPUT]
         Name loki
         Match *
-        Host loki.infra.captainfresh.in
+        Host logs-prod-014.grafana.net
         labels job=fluentbit
         label_keys $nms
         port 80
-        http_user fluentbit
+        http_user 405886
         tls off
         tls.verify Off
-        http_passwd eyJrIjoiOHJPTGFyaDhadVZCMGZ0VmVyNlJBcUNjNE9pNHM2QnoiLCJuIjoiZmx1ZW50Yml0IiwiaWQiOjF9
+        http_passwd eyJrIjoiNjAzN2VhZjYxNWE1YTFiODcyZTZlZDRhNWFmOTM2MWE5ZmE0ZTc5MCIsIm4iOiJIYXNoIENsdXN0ZXIiLCJpZCI6NTk5OTIxfQ==
