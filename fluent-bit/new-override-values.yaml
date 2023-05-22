@@ -34,8 +34,7 @@ config:
     [FILTER]
         Name modify
         Match *
-        Add BuildNumber SOMEVALUE
-        Add nms default
+        Add namespace none
 
   ## https://docs.fluentbit.io/manual/pipeline/outputs
   outputs: |
@@ -43,8 +42,7 @@ config:
         Name loki
         Match *
         Host logs-prod-014.grafana.net
-        labels job=fluentbit
-        label_keys $nms
+        labels job=fluent-bit, namespace = $nms
         port 80
         http_user 405886
         tls off
