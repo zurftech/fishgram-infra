@@ -35,6 +35,7 @@ config:
         Name modify
         Match *
         Add BuildNumber SOMEVALUE
+        Add nms default
 
   ## https://docs.fluentbit.io/manual/pipeline/outputs
   outputs: |
