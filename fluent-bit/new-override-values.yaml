@@ -31,6 +31,10 @@ config:
         Keep_Log Off
         K8S-Logging.Parser On
         K8S-Logging.Exclude On
+    [FILTER]
+        Name modify
+        Match *
+        Add BuildNumber SOMEVALUE
 
   ## https://docs.fluentbit.io/manual/pipeline/outputs
   outputs: |
