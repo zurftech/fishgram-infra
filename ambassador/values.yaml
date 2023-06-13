@@ -173,6 +173,8 @@ service:
       # protocol: TCP
       # nodePort: 30080
       # hostPort: 80
+  - port: 8000
+    name: websocket
   - name: https
     port: 443
     targetPort: 8443
