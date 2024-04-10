@@ -208,7 +208,7 @@ agent:
   image:
     tag: 
     repository:
-    tag: "3.9.1"
+    tag: "3.5.1"
     repository: "docker.io/emissaryingress/emissary"
 deploymentTool: ""
 
