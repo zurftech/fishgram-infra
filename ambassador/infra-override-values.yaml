@@ -208,7 +208,7 @@ agent:
   image:
     # Leave blank to use image.repository and image.tag
     tag: ""
-    repository: "docker.io/emissaryingress/emissary"
+    repository: ""
     # tag: "2.3.1"
     # repository: "docker.io/emissaryingress/emissary"
 deploymentTool: ""
