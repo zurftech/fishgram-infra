@@ -207,8 +207,10 @@ agent:
   rpcAddress: https://app.getambassador.io/
   image:
     # Leave blank to use image.repository and image.tag
-    tag: "2.3.1"
+    tag: ""
     repository: "docker.io/emissaryingress/emissary"
+    # tag: "2.3.1"
+    # repository: "docker.io/emissaryingress/emissary"
 deploymentTool: ""
 
 module:
