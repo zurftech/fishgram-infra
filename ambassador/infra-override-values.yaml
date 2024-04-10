@@ -206,10 +206,9 @@ agent:
   cloudConnectToken: ""
   rpcAddress: https://app.getambassador.io/
   image:
-    # Leave blank to use image.repository and image.tag
-    tag: ""
-    repository: ""
-    # tag: "2.3.1"
+    tag: 
+    repository:
+    # tag: "3.7.1"
     # repository: "docker.io/emissaryingress/emissary"
 deploymentTool: ""
 
