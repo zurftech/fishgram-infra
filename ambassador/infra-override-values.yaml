@@ -214,7 +214,7 @@ deploymentTool: ""
 module:
   enabled: true
   config: |
-    apiVersion: getambassador.io/v2
+    apiVersion: getambassador.io/v3alpha1
     kind: Module
     metadata:
       name: ambassador
@@ -277,7 +277,7 @@ module:
 host:
   enabled: true
   config: |
-    apiVersion: getambassador.io/v2
+    apiVersion: getambassador.io/v3alpha1
     kind: Host
     metadata:
       name: ambassador
