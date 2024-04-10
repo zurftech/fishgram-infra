@@ -281,7 +281,6 @@ host:
     kind: Host
     metadata:
       name: ambassador
-      namespace: infra-dev
     spec:
       ambassador_id: ["gw-infra-dev"]
       hostname: "*.api.zurf.tech"
