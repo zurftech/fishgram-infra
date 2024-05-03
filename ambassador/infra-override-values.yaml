@@ -206,8 +206,9 @@ agent:
   cloudConnectToken: ""
   rpcAddress: https://app.getambassador.io/
   image:
-    # Leave blank to use image.repository and image.tag
-    tag: "2.3.1"
+    tag: 
+    repository:
+    tag: "3.5.1"
     repository: "docker.io/emissaryingress/emissary"
 deploymentTool: ""
 
@@ -281,7 +282,6 @@ host:
     kind: Host
     metadata:
       name: ambassador
-      namespace: infra-prod
     spec:
       ambassador_id: ["gw-infra-prod"]
       hostname: "*.zurf.tech"
