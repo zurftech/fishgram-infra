@@ -1,5 +1,5 @@
 
-nameOverride: 'gw-infra-prod'
+nameOverride: 'gw-prod'
 
 replicaCount: 3
 daemonSet: false
@@ -25,7 +25,7 @@ autoscaling:
 podDisruptionBudget: {}
 
 env:
-  AMBASSADOR_ID: "gw-infra-prod"
+  AMBASSADOR_ID: "gw-prod"
 
 
 image:
@@ -51,7 +51,7 @@ service:
     # first install without this
     service.beta.kubernetes.io/aws-load-balancer-ssl-ports: "443"
     service.beta.kubernetes.io/aws-load-balancer-cross-zone-load-balancing-enabled: "true"
-    service.beta.kubernetes.io/aws-load-balancer-ssl-cert: "arn:aws:acm:ap-south-1:262258409534:certificate/86977c98-a15e-4e94-afd4-698221a4664b"
+    service.beta.kubernetes.io/aws-load-balancer-ssl-cert: "arn:aws:acm:ap-south-1:262258409534:certificate/ccb5f287-c312-43b6-8501-000955cc9a60"
 
 
 adminService:
@@ -220,7 +220,7 @@ module:
     metadata:
       name: ambassador
     spec:
-      ambassador_id: ["gw-infra-prod"]
+      ambassador_id: ["gw-prod"]
       config:
         use_proxy_proto: true
         cors:
@@ -283,8 +283,8 @@ host:
     metadata:
       name: ambassador
     spec:
-      ambassador_id: ["gw-infra-prod"]
-      hostname: "*.zurf.tech"
+      ambassador_id: ["gw-prod"]
+      hostname: "*.thor.zurf.tech"
       acmeProvider:
         authority: none
       requestPolicy:
@@ -299,7 +299,7 @@ listener:
     metadata:
       name: https-listener
     spec:
-      ambassador_id: ["gw-infra-prod"]
+      ambassador_id: ["gw-prod"]
       port: 8080                     # int32, port number on which to listen
       protocol: HTTPS                # HTTP, HTTPS, HTTPPROXY, HTTPSPROXY, TCP
       securityModel: XFP             # XFP (for X-Forwarded-Proto), SECURE, INSECURE
