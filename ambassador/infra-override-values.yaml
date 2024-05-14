@@ -1,5 +1,5 @@
 
-nameOverride: 'gw-prod'
+nameOverride: 'gw-dev'
 
 replicaCount: 3
 daemonSet: false
@@ -25,7 +25,7 @@ autoscaling:
 podDisruptionBudget: {}
 
 env:
-  AMBASSADOR_ID: "gw-prod"
+  AMBASSADOR_ID: "gw-dev"
 
 
 image:
@@ -66,7 +66,7 @@ rbac:
   # Specifies whether RBAC resources should be created
   create: true
   podSecurityPolicies: []
-  nameOverride: prod-gw-rbac
+  nameOverride: dev-gw-rbac
 
 scope:
   # tells Ambassador to only use resources in the namespace or namespace set by namespace.name
@@ -220,7 +220,7 @@ module:
     metadata:
       name: ambassador
     spec:
-      ambassador_id: ["gw-prod"]
+      ambassador_id: ["gw-dev"]
       config:
         use_proxy_proto: true
         cors:
@@ -283,7 +283,7 @@ host:
     metadata:
       name: ambassador
     spec:
-      ambassador_id: ["gw-prod"]
+      ambassador_id: ["gw-dev"]
       hostname: "*.thor.zurf.tech"
       acmeProvider:
         authority: none
@@ -299,7 +299,7 @@ listener:
     metadata:
       name: https-listener
     spec:
-      ambassador_id: ["gw-prod"]
+      ambassador_id: ["gw-dev"]
       port: 8080                     # int32, port number on which to listen
       protocol: HTTPS                # HTTP, HTTPS, HTTPPROXY, HTTPSPROXY, TCP
       securityModel: XFP             # XFP (for X-Forwarded-Proto), SECURE, INSECURE
