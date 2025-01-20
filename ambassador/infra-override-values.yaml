@@ -95,14 +95,14 @@ deploymentAnnotations:
   {}
   # configmap.reloader.stakater.com/auto: "true"
 
-resources:
+resources: {}
   # Recommended resource requests and limits for Ambassador
-  limits:
-    cpu: 1000m
-    memory: 600Mi
-  requests:
-    cpu: 200m
-    memory: 300Mi
+  # limits:
+  #   cpu: 1000m
+  #   memory: 600Mi
+  # requests:
+  #   cpu: 200m
+  #   memory: 300Mi
 
 priorityClassName: ""
 
