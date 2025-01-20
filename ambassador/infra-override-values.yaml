@@ -209,7 +209,7 @@ agent:
     tag: 
     repository:
     tag: "3.5.1"
-    repository: "docker.io/emissaryingress/emissary"
+    repository: "952679535946.dkr.ecr.ap-south-1.amazonaws.com/ambassador/emissaryingress/emissary"
 deploymentTool: ""
 
 module:
