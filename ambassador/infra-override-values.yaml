@@ -139,7 +139,7 @@ redisURL:
 redis:
   create: true
   image:
-    repository: redis
+    repository: 952679535946.dkr.ecr.ap-south-1.amazonaws.com/ambassador/redis
     tag: 5.0.1
     pullPolicy: IfNotPresent
   # Annotations for Ambassador Pro's redis instance.
